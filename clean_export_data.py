@@ -6,7 +6,7 @@
 #    By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/15 14:32:39 by dsindres          #+#    #+#              #
-#    Updated: 2025/09/18 10:48:58 by dsindres         ###   ########.fr        #
+#    Updated: 2025/09/29 11:12:41 by dsindres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ def clean_data(folder_clean_data):
                 sys.exit(1)
 
 # Verification des datas (bon format, bon type etc...)
-# convertir en np.ndarray pour eviter d'utiliser enumerate qui freeze sur un grand nombre de donnee
+# convertir en np.ndarray pour eviter d'utiliser iterrows qui freeze sur un grand nombre de donnee
 def verif_data(df: pd.DataFrame, file_name: str) -> int:
     expected_cols = ["event_time", "event_type", "product_id", "price", "user_id", "user_session"]
     if list(df.columns) != expected_cols:
@@ -200,7 +200,7 @@ def export_to_SQL(customers_df):
     """
 
     for i in range(0, total_records, chunk_size):
-        chunk_records = records[i:i + chunk_size]
+        chunk_records = records[i : i + chunk_size]
         values = []
         for record in chunk_records:
             converted_tuple = (
